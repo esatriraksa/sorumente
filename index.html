@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SorumEnte</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset dan Variable */
+        .logo {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        :root {
+            --primary: #e31837;
+            --secondary: #1a1a1a;
+            --accent: #ff1f41;
+            --light: #f5f5f5;
+            --dark: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar yang lebih lengkap */
+        .navbar {
+            background-color: var(--secondary);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links .active {
+            color: var(--primary);
+        }
+
+        /* Hero Section yang lebih menarik */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('Logo/Background 1.png');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Product Cards dengan hover effect */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-details {
+            padding: 1.5rem;
+        }
+
+        .product-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .product-price {
+            color: var(--primary);
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        .product-specs {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .product-specs span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .product-specs i {
+            color: var(--primary);
+        }
+
+        /* Badge untuk produk baru atau promo */
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .feature-item i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), 
+                        url('Logo/Background.png');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .contact.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 5px;
+            transform: translateX(-20px);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .contact.animate .contact-form input,
+        .contact.animate .contact-form textarea {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(227, 24, 55, 0.2);
+        }
+
+        .contact-form button {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-form button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .contact-form button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: #fff;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .brands {
+            background-color: var(--light);
+            padding: 5rem 5%;
+        }
+
+        .brand-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .brand-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .brand-logo {
+            width: 150px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-card h3 {
+            color: var(--dark);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .brand-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .brand-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(227, 24, 55, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .brand-overlay span {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .brand-card:hover .brand-overlay {
+            opacity: 1;
+        }
+
+        .brand-card:hover .brand-overlay span {
+            transform: translateY(0);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .brand-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .brand-logo {
+                width: 120px;
+                height: 80px;
+            }
+
+            .brand-card h3 {
+                font-size: 1.2rem;
+            }
+        }
+
+        .view-all {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.7rem 5%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 35px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links .active {
+            color: var(--primary);
+        }
+
+        .particle {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        /* Purchase Contact Styles */
+        .purchase-contact {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            padding: 80px 20px;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .purchase-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .purchase-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .glitch-text {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0,255,255,0.5);
+            position: relative;
+        }
+
+        .cyber-text {
+            color: #0ff;
+            font-size: 1.1em;
+            margin-top: 15px;
+        }
+
+        .neo-form {
+            background: rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .neo-input {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .neo-input input,
+        .neo-input textarea,
+        .neo-select select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255,255,255,0.05);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .neo-input label {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .neo-input input:focus + label,
+        .neo-input input:valid + label {
+            top: -20px;
+            font-size: 12px;
+            color: #0ff;
+        }
+
+        .input-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #0ff;
+            transition: all 0.3s ease;
+        }
+
+        .neo-input input:focus ~ .input-line {
+            width: 100%;
+        }
+
+        .neo-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,242,254,0.4);
+        }
+
+        .button-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .neo-button:hover .button-icon {
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="Logo/Sorum Ente.png" alt="SorumEnte Logo">
+        </a>
+        <div class="nav-links" class="active">
+            <a href="#home">Beranda</a>
+            <a href="#brands">Brand</a>
+            <a href="#products">Produk</a>
+            <a href="#features">Layanan</a>
+            <a href="#contact">Kontak</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Temukan Motor Impian Anda</h1>
+            <p>Sorum motor premium dengan koleksi terlengkap dan layanan terbaik</p>
+            <div class="hero-buttons">
+                <a href="#brands" class="btn">Lihat Brand</a>
+                <a href="#contact" class="btn btn-outline">Hubungi Kami</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Selection Section -->
+    <section class="section brands" id="brands">
+        <div class="section-title">
+            <h2>Brand Premium</h2>
+            <p>Koleksi motor dari brand ternama dunia</p>
+        </div>
+        
+        <div class="brand-container">
+            <!-- Honda -->
+            <div class="brand-card">
+                <div class="brand-logo">
+                    <img src="Logo/Logo Honda.png" alt="Honda">
+                </div>
+                <h3>Honda</h3>
+                <p>The Power of Dreams</p>
+                <div class="brand-overlay">
+                    <a href="honda.html"><span>Lihat Koleksi</span></a>
+                </div>
+            </div>
+
+            <!-- Yamaha -->
+            <div class="brand-card">
+                <div class="brand-logo">
+                    <img src="Logo/Logo Yamaha.png" alt="Yamaha">
+                </div>
+                <h3>Yamaha</h3>
+                <p>Revs Your Heart</p>
+                <div class="brand-overlay">
+                    <a href="yamaha.html"><span>Lihat Koleksi</span></a>
+                </div>
+            </div>
+
+            <!-- Kawasaki -->
+            <div class="brand-card">
+                <div class="brand-logo">
+                    <img src="Logo/Logo Kawasaki.png" alt="Kawasaki">
+                </div>
+                <h3>Kawasaki</h3>
+                <p>Let the good times roll</p>
+                <div class="brand-overlay">
+                    <a href="kawasaki.html"><span>Lihat Koleksi</span></a>
+                </div>
+            </div>
+
+            <!-- Harley Davidson -->
+            <div class="brand-card">
+                <div class="brand-logo">
+                    <img src="Logo/Logo Harley.png" alt="Harley Davidson">
+                </div>
+                <h3>Harley Davidson</h3>
+                <p>Live To Ride, Ride To Live</p>
+                <div class="brand-overlay">
+                    <a href="harley.html"><span>Lihat Koleksi</span></a>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="section" id="products">
+        <div class="section-title">
+            <h2>Motor Unggulan</h2>
+            <p>Koleksi motor premium pilihan dengan kualitas terbaik</p>
+        </div>
+        <div class="product-grid">
+            <!-- Kawasaki Ninja H2R -->
+            <div class="product-card">
+                <div class="product-badge">Ultimate</div>
+                <div class="product-image">
+                    <img src="Motor/Kawasaki/Gambar/Ninja H2R.png" alt="Ninja H2R">
+                </div>
+                <div class="product-details">
+                    <h3>Kawasaki Ninja H2R</h3>
+                    <div class="product-price">Rp 1.100.000.000</div>
+                    <p>Built Beyond Belief</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 310 HP</span>
+                        <span><i class="fas fa-gauge"></i> 400 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+
+            <!-- Honda CBR1000RR-R -->
+            <div class="product-card">
+                <div class="product-badge">Super Sport</div>
+                <div class="product-image">
+                    <img src="Motor/Honda/Gambar/CBR 1000RR R Fireblade SP.png" alt="CBR1000RR-R">
+                </div>
+                <div class="product-details">
+                    <h3>CBR1000RR-R Fireblade SP</h3>
+                    <div class="product-price">Rp 920.000.000</div>
+                    <p>Total Control</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 217 HP</span>
+                        <span><i class="fas fa-gauge"></i> 299 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+
+            <!-- Yamaha R1M -->
+            <div class="product-card">
+                <div class="product-badge">Racing</div>
+                <div class="product-image">
+                    <img src="Motor/Yamaha/Gambar/R1M.png" alt="Yamaha R1M">
+                </div>
+                <div class="product-details">
+                    <h3>Yamaha YZF-R1M</h3>
+                    <div class="product-price">Rp 812.000.000</div>
+                    <p>Racing DNA</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 200 HP</span>
+                        <span><i class="fas fa-gauge"></i> 299 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+
+            <!-- Harley Davidson Sportster S -->
+            <div class="product-card">
+                <div class="product-badge">Sport Heritage</div>
+                <div class="product-image">
+                    <img src="Motor/Harley/Gambar/Sportster™ S.png" alt="Harley Sportster S">
+                </div>
+                <div class="product-details">
+                    <h3>Sportster™ S</h3>
+                    <div class="product-price">Rp 450.000.000</div>
+                    <p>Sport Heritage</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 121 HP</span>
+                        <span><i class="fas fa-gauge"></i> 240 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section features" id="features">
+        <div class="section-title">
+            <h2>Mengapa Memilih Kami</h2>
+            <p>Keunggulan layanan SorumEnte untuk kepuasan pelanggan</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-item">
+                <i class="fas fa-check-circle"></i>
+                <h3>Kualitas Terjamin</h3>
+                <p>Semua motor telah melalui inspeksi ketat</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-money-bill-wave"></i>
+                <h3>Harga Terbaik</h3>
+                <p>Penawaran spesial dan cicilan ringan</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-tools"></i>
+                <h3>Servis Berkala</h3>
+                <p>Layanan after sales terpercaya</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-headset"></i>
+                <h3>24/7 Support</h3>
+                <p>Layanan pelanggan selama 24 jam</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="section-title">
+            <h2>Hubungi Kami</h2>
+            <p>Konsultasikan kebutuhan Anda dengan tim kami</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Informasi Kontak</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Jl. Motor Raya No. 123, Jakarta</p>
+                <p><i class="fas fa-phone"></i> +62 123 4567 890</p>
+                <p><i class="fas fa-envelope"></i> info@sorumente.com</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form>
+                    <input type="text" placeholder="Nama Lengkap" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="tel" placeholder="Nomor Telepon" required>
+                    <textarea rows="5" placeholder="Pesan" required></textarea>
+                    <button type="submit" class="btn">Kirim Pesan</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-links">
+                <h3>Tentang Kami</h3>
+                <p>SorumEnte adalah sorum motor premium terpercaya dengan pengalaman lebih dari 10 tahun.</p>
+            </div>
+            <div class="footer-links">
+                <h3>Links</h3>
+                <a href="#home">Beranda</a>
+                <a href="#brands">Brand</a>
+                <a href="#products">Produk</a>
+                <a href="#features">Layanan</a>
+                <a href="#contact">Kontak</a>
+            </div>
+            <div class="footer-links">
+                <h3>Layanan</h3>
+                <a href="#">Pembelian Motor</a>
+                <a href="#">Servis Berkala</a>
+                <a href="#">Spare Parts</a>
+                <a href="#">Konsultasi</a>
+            </div>
+            <div class="footer-links">
+                <h3>Newsletter</h3>
+                <p>Berlangganan untuk mendapatkan info terbaru</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email Anda">
+                    <button type="submit" class="btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 SorumEnte. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <script>
+    // Parallax Effect untuk Hero Section
+    window.addEventListener('scroll', function() {
+        const hero = document.querySelector('.hero');
+        const scrolled = window.pageYOffset;
+        hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
+    });
+
+    // Animasi untuk Hero Content
+    document.addEventListener('DOMContentLoaded', function() {
+        const heroContent = document.querySelector('.hero-content');
+        heroContent.style.opacity = '0';
+        heroContent.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            heroContent.style.transition = 'all 1s ease';
+            heroContent.style.opacity = '1';
+            heroContent.style.transform = 'translateY(0)';
+        }, 500);
+
+        // Particle Effect untuk Hero
+        const hero = document.querySelector('.hero');
+        for(let i = 0; i < 50; i++) {
+            createParticle(hero);
+        }
+    });
+
+    // Fungsi untuk membuat particle
+    function createParticle(parent) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.cssText = `
+            position: absolute;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            width: ${Math.random() * 4 + 1}px;
+            height: ${Math.random() * 4 + 1}px;
+            left: ${Math.random() * 100}vw;
+            top: ${Math.random() * 100}vh;
+        `;
+
+        const animation = particle.animate([
+            { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+            { transform: `translateY(-100vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+        ], {
+            duration: Math.random() * 3000 + 2000,
+            iterations: Infinity
+        });
+
+        parent.appendChild(particle);
+    }
+
+    // Animasi untuk Contact Section
+    const contactSection = document.querySelector('.contact');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    observer.observe(contactSection);
+
+    // Form Validation dan Animasi
+    const contactForm = document.querySelector('.contact-form');
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Animasi saat submit
+        const btn = this.querySelector('button[type="submit"]');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+        
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fas fa-check"></i> Terkirim!';
+            btn.style.backgroundColor = '#28a745';
+            
+            // Reset form setelah 2 detik
+            setTimeout(() => {
+                this.reset();
+                btn.innerHTML = 'Kirim Pesan';
+                btn.style.backgroundColor = '';
+            }, 2000);
+        }, 1500);
+    });
+
+    // Hover effect untuk navigation
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+        });
+        
+        link.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+    </script>
+</body>
+</html>

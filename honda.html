@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honda Collection - MotoDealer Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Core Styles */
+        :root {
+            --primary: #CC0000;  /* Ducati red */
+            --secondary: #1a1a1a;
+            --accent: #ff0000;
+            --light: #f5f5f5;
+            --dark: #333;
+            --ducati-red: #CC0000;
+            --ducati-dark: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Brand Header Enhancement */
+        .brand-header {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),
+                url('Logo/Background Honda.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.brand-content {
+    text-align: center;
+    color: #fff;
+    z-index: 2;
+}
+
+.brand-logo {
+    width: 250px;
+    filter: drop-shadow(0 0 20px rgba(255,255,255,0.3));
+    animation: float 3s ease-in-out infinite;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease forwards;
+}
+
+.slide-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUp 1s ease forwards 0.5s;
+}
+
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+        /* Enhanced Category Navigation */
+        .category-nav {
+            background: var(--light);
+            padding: 0.8rem 5%;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 50px;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .category-nav a {
+            color: var(--dark);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: 0.3s;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .category-nav a i {
+            font-size: 1rem;
+        }
+
+        .category-nav a:hover,
+        .category-nav a.active {
+            background: var(--ducati-red);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Category Sections Enhancement */
+        .category-section {
+            padding: 6rem 5%;
+            background: #fff;
+        }
+
+        .category-section:nth-child(even) {
+            background: var(--light);
+        }
+
+        .category-title {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .category-title h2 {
+            font-size: 2.5rem;
+            color: var(--ducati-dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .category-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--ducati-red);
+            border-radius: 2px;
+        }
+
+        .category-title p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Enhanced Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--ducati-red);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            z-index: 1;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .product-details {
+            padding: 2rem;
+        }
+
+        .product-details h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--ducati-dark);
+        }
+
+        .product-price {
+            color: var(--ducati-red);
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin: 0.8rem 0;
+        }
+
+        .product-specs {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .product-specs span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .product-specs i {
+            color: var(--ducati-red);
+        }
+
+        /* Enhanced Button Styles */
+        .btn {
+            padding: 1rem 2rem;
+            background: var(--ducati-red);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: 0.3s;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            text-align: center;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(227, 24, 55, 0.3);
+        }
+
+        /* Additional Features */
+        .features-bar {
+            background: var(--ducati-dark);
+            color: #fff;
+            padding: 2rem 5%;
+            margin-top: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .feature-item {
+            padding: 1rem;
+        }
+
+        .feature-item i {
+            font-size: 2rem;
+            color: var(--ducati-red);
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .brand-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .category-nav {
+                padding: 0.6rem 2%;
+                gap: 0.5rem;
+            }
+
+            .category-nav a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        .navbar {
+            background: var(--ducati-dark);
+            padding: 0.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar .logo img {
+            height: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: var(--ducati-red);
+            color: #fff;
+        }
+
+        .category-nav {
+            background: var(--light);
+            padding: 0.8rem 5%;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 50px;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .category-nav a {
+            color: var(--dark);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: 0.3s;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .category-nav a i {
+            font-size: 1rem;
+        }
+
+        .category-nav a:hover,
+        .category-nav a.active {
+            background: var(--ducati-red);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.5rem 2%;
+            }
+            
+            .nav-links {
+                gap: 0.5rem;
+            }
+            
+            .nav-links a {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.8rem;
+            }
+            
+            .category-nav {
+                padding: 0.6rem 2%;
+                gap: 0.5rem;
+                top: 45px;
+            }
+            
+            .category-nav a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="Logo/Sorum Ente.png" alt="SorumEnte Logo">
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Beranda</a>
+            <a href="honda.html" class="active">Honda</a>
+            <a href="yamaha.html">Yamaha</a>
+            <a href="kawasaki.html">Kawasaki</a>
+            <a href="harley.html">Harley Davidson</a>
+        </div>
+    </nav>
+
+    <!-- Brand Header -->
+    <header class="brand-header" id="brandHeader">
+        <div class="brand-content">
+            <img src="Logo/Logo Honda.png" alt="Honda Logo" class="brand-logo" id="brandLogo">
+            <h1 class="fade-in">Honda Collection</h1>
+            <p class="slide-up">The Power of Dreams</p>
+        </div>
+        <div class="particles" id="particles"></div>
+    </header>
+
+    <!-- Category Navigation -->
+    <nav class="category-nav">
+        <a href="#superbike" class="active"><i class="fas fa-motorcycle"></i>Superbike</a>
+        <a href="#naked"><i class="fas fa-bolt"></i>Naked Bike</a>
+        <a href="#adventure"><i class="fas fa-mountain"></i>Adventure</a>
+        <a href="#touring"><i class="fas fa-road"></i>Sport Touring</a>
+        <a href="#luxury"><i class="fas fa-crown"></i>Luxury Touring</a>
+        <a href="#cruiser"><i class="fas fa-couch"></i>Cruiser</a>
+    </nav>
+
+    <!-- Superbike Category -->
+    <section class="category-section" id="superbike">
+        <div class="category-title">
+            <h2>Superbike Collection</h2>
+            <p>Koleksi motor Superbike Honda dengan performa tinggi dan teknologi MotoGP</p>
+        </div>
+        <div class="product-grid">
+            <!-- CBR1000RR-R Fireblade SP -->
+            <div class="product-card">
+                <div class="product-badge">Flagship</div>
+                <div class="product-image">
+                    <img src="Motor/Honda/Gambar/CBR 1000RR R Fireblade SP.png" alt="CBR1000RR-R">
+                </div>
+                <div class="product-details">
+                    <h3>CBR1000RR-R Fireblade SP</h3>
+                    <div class="product-price">Rp 1.122.650.000</div>
+                    <p>Total Control</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 215 HP</span>
+                        <span><i class="fas fa-gauge"></i> 299 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+
+            <!-- CBR600RR -->
+            <div class="product-card">
+                <div class="product-badge">Super Sport</div>
+                <div class="product-image">
+                    <img src="Motor/Honda/Gambar/CBR 650 R.jpg" alt="CBR600RR">
+                </div>
+                <div class="product-details">
+                    <h3>CBR600RR</h3>
+                    <div class="product-price">Rp 372.500.000</div>
+                    <p>Race Ready Performance</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 121 HP</span>
+                        <span><i class="fas fa-gauge"></i> 262 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Naked Bike Category -->
+    <section class="category-section" id="naked">
+        <div class="category-title">
+            <h2>Naked Bike Collection</h2>
+            <p>Motor naked dengan performa tinggi dan desain agresif</p>
+        </div>
+        <div class="product-grid">
+            <!-- CB1000R Black Edition -->
+            <div class="product-card">
+                <div class="product-badge">Premium</div>
+                <div class="product-image">
+                    <img src="Motor/Honda/Gambar/CB 1000 R Black Edition.png" alt="CB1000R">
+                </div>
+                <div class="product-details">
+                    <h3>CB1000R Black Edition</h3>
+                    <div class="product-price">Rp 585.000.000</div>
+                    <p>Neo Sports Café</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 145 HP</span>
+                        <span><i class="fas fa-gauge"></i> 240 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+
+            <!-- CB750 Hornet -->
+            <div class="product-card">
+                <div class="product-badge">New Model</div>
+                <div class="product-image">
+                    <img src="Motor/Honda/Gambar/CB 750 Hornet.jpg" alt="CB750 Hornet">
+                </div>
+                <div class="product-details">
+                    <h3>CB750 Hornet</h3>
+                    <div class="product-price">Rp 252.700.000</div>
+                    <p>Create Your Buzz</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 92 HP</span>
+                        <span><i class="fas fa-gauge"></i> 210 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+
+            <!-- CB650R -->
+            <div class="product-card">
+                <div class="product-badge">Popular</div>
+                <div class="product-image">
+                    <img src="Motor/Honda/Gambar/CB650R.png" alt="CB650R">
+                </div>
+                <div class="product-details">
+                    <h3>CB650R</h3>
+                    <div class="product-price">Rp 289.900.000</div>
+                    <p>Street Fighter</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 95 HP</span>
+                        <span><i class="fas fa-gauge"></i> 225 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Adventure Category -->
+    <section class="category-section" id="adventure">
+        <div class="category-title">
+            <h2>Adventure Collection</h2>
+            <p>Motor petualang untuk menjelajahi berbagai medan</p>
+        </div>
+        <div class="product-grid">
+            <!-- Africa Twin Adventure Sports -->
+            <div class="product-card">
+                <div class="product-badge">Adventure</div>
+                <div class="product-image">
+                    <img src="Motor/Honda/Gambar/Africa Twin Adventure Sports.png" alt="Africa Twin">
+                </div>
+                <div class="product-details">
+                    <h3>Africa Twin Adventure Sports</h3>
+                    <div class="product-price">Rp 595.000.000</div>
+                    <p>True Adventure</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 102 HP</span>
+                        <span><i class="fas fa-gauge"></i> 200 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+
+            <!-- XL750 Transalp -->
+            <div class="product-card">
+                <div class="product-badge">Adventure</div>
+                <div class="product-image">
+                    <img src="Motor/Honda/Gambar/XL750 Transalp.png" alt="XL750 Transalp">
+                </div>
+                <div class="product-details">
+                    <h3>XL750 Transalp</h3>
+                    <div class="product-price">Rp 289.000.000</div>
+                    <p>Adventure Your World</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 90 HP</span>
+                        <span><i class="fas fa-gauge"></i> 200 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+
+            <!-- X-ADV -->
+            <div class="product-card">
+                <div class="product-badge">Adventure Scooter</div>
+                <div class="product-image">
+                    <img src="Motor/Honda/Gambar/X ADV.jpg" alt="X-ADV">
+                </div>
+                <div class="product-details">
+                    <h3>X-ADV</h3>
+                    <div class="product-price">Rp 419.000.000</div>
+                    <p>Go Beyond Boundaries</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 58 HP</span>
+                        <span><i class="fas fa-gauge"></i> 170 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sport Touring Category -->
+    <section class="category-section" id="touring">
+        <div class="category-title">
+            <h2>Sport Touring Collection</h2>
+            <p>Motor touring dengan kenyamanan dan performa tinggi</p>
+        </div>
+        <div class="product-grid">
+            <!-- NT1100 -->
+            <div class="product-card">
+                <div class="product-badge">Sport Touring</div>
+                <div class="product-image">
+                    <img src="Motor/Honda/Gambar/NT1100.jpg" alt="NT1100">
+                </div>
+                <div class="product-details">
+                    <h3>NT1100 DCT</h3>
+                    <div class="product-price">Rp 478.500.000</div>
+                    <p>New Touring Era</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 102 HP</span>
+                        <span><i class="fas fa-gauge"></i> 200 km/h</span>
+                    </div>
+                    <a href="Motor/Honda/NT1100.html" class="btn">Lihat Detail</a>
+                </div>
+            </div>
+
+            <!-- CBR650R -->
+            <div class="product-card">
+                <div class="product-badge">Sport</div>
+                <div class="product-image">
+                    <img src="Motor/Honda/Gambar/CBR 650 R.jpg" alt="CBR650R">
+                </div>
+                <div class="product-details">
+                    <h3>CBR650R</h3>
+                    <div class="product-price">Rp 278.900.000</div>
+                    <p>Race DNA for the Street</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 95 HP</span>
+                        <span><i class="fas fa-gauge"></i> 225 km/h</span>
+                    </div>
+                    <a href="Motor/Honda/CBR650R.html" class="btn">Lihat Detail</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Luxury Touring Category -->
+    <section class="category-section" id="luxury">
+        <div class="category-title">
+            <h2>Luxury Touring Collection</h2>
+            <p>Motor touring premium dengan kenyamanan maksimal untuk perjalanan jarak jauh</p>
+        </div>
+        <div class="product-grid">
+            <!-- Gold Wing Tour DCT Airbag -->
+            <div class="product-card">
+                <div class="product-badge">Ultimate Touring</div>
+                <div class="product-image">
+                    <img src="Motor/Honda/Gambar/Gold Wing Tour Airbag.png" alt="Gold Wing Tour Airbag">
+                </div>
+                <div class="product-details">
+                    <h3>Gold Wing Tour DCT Airbag</h3>
+                    <div class="product-price">Rp 1.419.000.000</div>
+                    <p>The Ultimate Luxury Touring</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 126 HP</span>
+                        <span><i class="fas fa-gauge"></i> 180 km/h</span>
+                    </div>
+                    <a href="Motor/Honda/Gold Wing Tour Airbag.html" class="btn">Lihat Detail</a>
+                </div>
+            </div>
+
+            <!-- Gold Wing Tour DCT -->
+            <div class="product-card">
+                <div class="product-badge">Premium Touring</div>
+                <div class="product-image">
+                    <img src="Motor/Honda/Gambar/Gold Wing Tour.png" alt="Gold Wing Tour">
+                </div>
+                <div class="product-details">
+                    <h3>Gold Wing Tour DCT</h3>
+                    <div class="product-price">Rp 1.289.000.000</div>
+                    <p>Perfect Touring</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 126 HP</span>
+                        <span><i class="fas fa-gauge"></i> 180 km/h</span>
+                    </div>
+                    <a href="Motor/Honda/Gold Wing Tour.html" class="btn">Lihat Detail</a>
+                </div>
+            </div>
+
+            <!-- Gold Wing Bagger -->
+            <div class="product-card">
+                <div class="product-badge">Classic Touring</div>
+                <div class="product-image">
+                    <img src="Motor/Honda/Gambar/Gold Wing Bagger.png" alt="Gold Wing Bagger">
+                </div>
+                <div class="product-details">
+                    <h3>Gold Wing Bagger DCT</h3>
+                    <div class="product-price">Rp 1.250.000.000</div>
+                    <p>Modern Classic Touring</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 126 HP</span>
+                        <span><i class="fas fa-gauge"></i> 180 km/h</span>
+                    </div>
+                    <a href="Motor/Honda/Gold Wing Bagger.html" class="btn">Lihat Detail</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cruiser Category -->
+    <section class="category-section" id="cruiser">
+        <div class="category-title">
+            <h2>Cruiser Collection</h2>
+            <p>Motor cruiser dengan gaya klasik modern</p>
+        </div>
+        <div class="product-grid">
+            <!-- Rebel 500 -->
+            <div class="product-card">
+                <div class="product-badge">Cruiser</div>
+                <div class="product-image">
+                    <img src="Motor/Honda/Gambar/Rebel 500.png" alt="Rebel 500">
+                </div>
+                <div class="product-details">
+                    <h3>Rebel 500</h3>
+                    <div class="product-price">Rp 196.900.000</div>
+                    <p>Express Your Style</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 46 HP</span>
+                        <span><i class="fas fa-gauge"></i> 170 km/h</span>
+                    </div>
+                    <a href="Motor/Honda/Rebel 500.html" class="btn">Lihat Detail</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Bar -->
+    <div class="features-bar">
+        <div class="features-grid">
+            <div class="feature-item">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Garansi Resmi</h3>
+                <p>3 tahun atau 36.000 km</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-tools"></i>
+                <h3>Servis Berkala</h3>
+                <p>Gratis sampai 50.000 km</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-medal"></i>
+                <h3>Genuine Parts</h3>
+                <p>100% parts original Honda</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-headset"></i>
+                <h3>24/7 Support</h3>
+                <p>Bantuan teknis 24 jam</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <!-- Footer content dari HOME.html -->
+    </footer>
+
+    <script>
+        // Parallax Effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('brandHeader');
+            const scrolled = window.pageYOffset;
+            header.style.backgroundPositionY = scrolled * 0.5 + 'px';
+        });
+        
+        // Particle Effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles');
+            
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    background: rgba(255, 255, 255, 0.5);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    width: ${Math.random() * 4 + 1}px;
+                    height: ${Math.random() * 4 + 1}px;
+                    left: ${Math.random() * 100}vw;
+                    top: ${Math.random() * 100}vh;
+                `;
+        
+                const animation = particle.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(-100vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    easing: 'linear',
+                    iterations: Infinity
+                });
+        
+                particlesContainer.appendChild(particle);
+            }
+        
+            // Create multiple particles
+            for(let i = 0; i < 50; i++) {
+                createParticle();
+            }
+        
+            // Logo hover effect
+            const logo = document.getElementById('brandLogo');
+            logo.addEventListener('mouseover', function() {
+                this.style.transform = 'scale(1.1) rotate(5deg)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+        
+            logo.addEventListener('mouseout', function() {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+        
+        // Smooth reveal on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        });
+        
+        document.querySelectorAll('.brand-content > *').forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honda Collection - MotoDealer Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Core Styles */
+        :root {
+            --primary: #CC0000;  /* Ducati red */
+            --secondary: #1a1a1a;
+            --accent: #ff0000;
+            --light: #f5f5f5;
+            --dark: #333;
+            --ducati-red: #CC0000;
+            --ducati-dark: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Brand Header Enhancement */
+        .brand-header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),
+                        url('Logo/Background Yamaha.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-content {
+            text-align: center;
+            color: #fff;
+            z-index: 2;
+        }
+
+        .brand-logo {
+            width: 250px;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.3));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .slide-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 1s ease forwards 0.5s;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Enhanced Category Navigation */
+        .category-nav {
+            background: var(--light);
+            padding: 0.8rem 5%;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 50px;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .category-nav a {
+            color: var(--dark);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: 0.3s;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .category-nav a i {
+            font-size: 1rem;
+        }
+
+        .category-nav a:hover,
+        .category-nav a.active {
+            background: var(--ducati-red);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Category Sections Enhancement */
+        .category-section {
+            padding: 6rem 5%;
+            background: #fff;
+        }
+
+        .category-section:nth-child(even) {
+            background: var(--light);
+        }
+
+        .category-title {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .category-title h2 {
+            font-size: 2.5rem;
+            color: var(--ducati-dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .category-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--ducati-red);
+            border-radius: 2px;
+        }
+
+        .category-title p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Enhanced Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--ducati-red);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            z-index: 1;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .product-details {
+            padding: 2rem;
+        }
+
+        .product-details h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--ducati-dark);
+        }
+
+        .product-price {
+            color: var(--ducati-red);
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin: 0.8rem 0;
+        }
+
+        .product-specs {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .product-specs span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .product-specs i {
+            color: var(--ducati-red);
+        }
+
+        /* Enhanced Button Styles */
+        .btn {
+            padding: 1rem 2rem;
+            background: var(--ducati-red);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: 0.3s;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            text-align: center;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(227, 24, 55, 0.3);
+        }
+
+        /* Additional Features */
+        .features-bar {
+            background: var(--ducati-dark);
+            color: #fff;
+            padding: 2rem 5%;
+            margin-top: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .feature-item {
+            padding: 1rem;
+        }
+
+        .feature-item i {
+            font-size: 2rem;
+            color: var(--ducati-red);
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .brand-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .category-nav {
+                padding: 0.6rem 2%;
+                gap: 0.5rem;
+            }
+
+            .category-nav a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        .navbar {
+            background: var(--ducati-dark);
+            padding: 0.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar .logo img {
+            height: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: var(--ducati-red);
+            color: #fff;
+        }
+
+        .category-nav {
+            background: var(--light);
+            padding: 0.8rem 5%;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 50px;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .category-nav a {
+            color: var(--dark);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: 0.3s;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .category-nav a i {
+            font-size: 1rem;
+        }
+
+        .category-nav a:hover,
+        .category-nav a.active {
+            background: var(--ducati-red);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.5rem 2%;
+            }
+            
+            .nav-links {
+                gap: 0.5rem;
+            }
+            
+            .nav-links a {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.8rem;
+            }
+            
+            .category-nav {
+                padding: 0.6rem 2%;
+                gap: 0.5rem;
+                top: 45px;
+            }
+            
+            .category-nav a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="Logo/Sorum Ente.png" alt="SorumEnte Logo">
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Beranda</a>
+            <a href="honda.html">Honda</a>
+            <a href="yamaha.html" class="active">Yamaha</a>
+            <a href="kawasaki.html">Kawasaki</a>
+            <a href="harley.html">Harley Davidson</a>
+        </div>
+    </nav>
+
+    <!-- Brand Header -->
+    <header class="brand-header" id="brandHeader">
+        <div class="brand-content">
+            <img src="Logo/Logo Yamaha.png" alt="Yamaha Logo" class="brand-logo" id="brandLogo">
+            <h1 class="fade-in">Yamaha Collection</h1>
+            <p class="slide-up">Revs Your Heart</p>
+        </div>
+        <div class="particles" id="particles"></div>
+    </header>
+
+    <!-- Category Navigation -->
+    <nav class="category-nav">
+        <a href="#superbike" class="active"><i class="fas fa-motorcycle"></i>Superbike</a>
+        <a href="#naked"><i class="fas fa-bolt"></i>Naked Bike</a>
+        <a href="#adventure"><i class="fas fa-mountain"></i>Adventure</a>
+    </nav>
+
+    <!-- Superbike Category -->
+    <section class="category-section" id="superbike">
+        <div class="category-title">
+            <h2>Superbike Collection</h2>
+            <p>Koleksi motor Superbike Yamaha dengan teknologi MotoGP</p>
+        </div>
+        <div class="product-grid">
+            <!-- YZF-R1M -->
+            <div class="product-card">
+                <div class="product-badge">Flagship</div>
+                <div class="product-image">
+                    <img src="Motor/Yamaha/Gambar/R1M.png" alt="YZF-R1M">
+                </div>
+                <div class="product-details">
+                    <h3>Yamaha YZF-R1M</h3>
+                    <div class="product-price">Rp 812.000.000</div>
+                    <p>The Pure Racing Machine</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 200 HP</span>
+                        <span><i class="fas fa-gauge"></i> 299 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+
+            <!-- YZF-R1 -->
+            <div class="product-card">
+                <div class="product-badge">Superbike</div>
+                <div class="product-image">
+                    <img src="Motor/Yamaha/Gambar/R1.png" alt="YZF-R1">
+                </div>
+                <div class="product-details">
+                    <h3>Yamaha YZF-R1</h3>
+                    <div class="product-price">Rp 759.000.000</div>
+                    <p>Racing DNA</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 200 HP</span>
+                        <span><i class="fas fa-gauge"></i> 299 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+
+            <!-- YZF-R6 RACE -->
+            <div class="product-card">
+                <div class="product-badge">Racing</div>
+                <div class="product-image">
+                    <img src="Motor/Yamaha/Gambar/R9.png" alt="YZF-R6">
+                </div>
+                <div class="product-details">
+                    <h3>Yamaha YZF-R6 RACE</h3>
+                    <div class="product-price">Rp 489.000.000</div>
+                    <p>Track Ready Supersport</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 118 HP</span>
+                        <span><i class="fas fa-gauge"></i> 262 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Naked Bike Category -->
+    <section class="category-section" id="naked">
+        <div class="category-title">
+            <h2>Naked Bike Collection</h2>
+            <p>Motor naked dengan performa tinggi dan desain agresif</p>
+        </div>
+        <div class="product-grid">
+            <!-- MT-10 SP -->
+            <div class="product-card">
+                <div class="product-badge">Hyper Naked</div>
+                <div class="product-image">
+                    <img src="Motor/Yamaha/Gambar/MT-10.png" alt="MT-10 SP">
+                </div>
+                <div class="product-details">
+                    <h3>Yamaha MT-10 SP</h3>
+                    <div class="product-price">Rp 499.000.000</div>
+                    <p>The Ultimate Master of Torque</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 165 HP</span>
+                        <span><i class="fas fa-gauge"></i> 255 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+
+            <!-- MT-09 SP -->
+            <div class="product-card">
+                <div class="product-badge">Premium Naked</div>
+                <div class="product-image">
+                    <img src="Motor/Yamaha/Gambar/MT-09.png" alt="MT-09 SP">
+                </div>
+                <div class="product-details">
+                    <h3>Yamaha MT-09 SP</h3>
+                    <div class="product-price">Rp 369.000.000</div>
+                    <p>Dark Side of Japan</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 119 HP</span>
+                        <span><i class="fas fa-gauge"></i> 230 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+
+            <!-- XSR900 -->
+            <div class="product-card">
+                <div class="product-badge">Sport Heritage</div>
+                <div class="product-image">
+                    <img src="Motor/Yamaha/Gambar/XSR900.png" alt="XSR900">
+                </div>
+                <div class="product-details">
+                    <h3>Yamaha XSR900</h3>
+                    <div class="product-price">Rp 359.000.000</div>
+                    <p>Faster Son</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 119 HP</span>
+                        <span><i class="fas fa-gauge"></i> 230 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Adventure Category -->
+    <section class="category-section" id="adventure">
+        <div class="category-title">
+            <h2>Adventure Collection</h2>
+            <p>Motor petualang untuk menjelajahi berbagai medan</p>
+        </div>
+        <div class="product-grid">
+            <!-- Tracer 9 GT+ -->
+            <div class="product-card">
+                <div class="product-badge">Sport Touring</div>
+                <div class="product-image">
+                    <img src="Motor/Yamaha/Gambar/Tracer 9.png" alt="Tracer 9 GT+">
+                </div>
+                <div class="product-details">
+                    <h3>Yamaha Tracer 9 GT+</h3>
+                    <div class="product-price">Rp 429.000.000</div>
+                    <p>Premium Sport Touring</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 119 HP</span>
+                        <span><i class="fas fa-gauge"></i> 230 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+
+            <!-- Tenere 700 -->
+            <div class="product-card">
+                <div class="product-badge">Adventure</div>
+                <div class="product-image">
+                    <img src="Motor/Yamaha/Gambar/Tenere 700.png" alt="Tenere 700">
+                </div>
+                <div class="product-details">
+                    <h3>Yamaha Tenere 700</h3>
+                    <div class="product-price">Rp 389.000.000</div>
+                    <p>Go Beyond</p>
+                    <div class="product-specs">
+                        <span><i class="fas fa-tachometer-alt"></i> 72 HP</span>
+                        <span><i class="fas fa-gauge"></i> 190 km/h</span>
+                    </div>
+                    <a href="Beli.html" class="btn">Buat Pesanan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Bar -->
+    <div class="features-bar">
+        <div class="features-grid">
+            <div class="feature-item">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Garansi Resmi</h3>
+                <p>3 tahun atau 36.000 km</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-tools"></i>
+                <h3>Servis Berkala</h3>
+                <p>Gratis sampai 50.000 km</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-medal"></i>
+                <h3>Genuine Parts</h3>
+                <p>100% parts original Honda</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-headset"></i>
+                <h3>24/7 Support</h3>
+                <p>Bantuan teknis 24 jam</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <!-- Footer content dari HOME.html -->
+    </footer>
+
+    <script>
+    // Parallax Effect
+    window.addEventListener('scroll', function() {
+        const header = document.getElementById('brandHeader');
+        const scrolled = window.pageYOffset;
+        header.style.backgroundPositionY = scrolled * 0.5 + 'px';
+    });
+
+    // Particle Effect
+    document.addEventListener('DOMContentLoaded', function() {
+        const particlesContainer = document.getElementById('particles');
+        
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: absolute;
+                background: rgba(255, 255, 255, 0.5);
+                border-radius: 50%;
+                pointer-events: none;
+                width: ${Math.random() * 4 + 1}px;
+                height: ${Math.random() * 4 + 1}px;
+                left: ${Math.random() * 100}vw;
+                top: ${Math.random() * 100}vh;
+            `;
+
+            const animation = particle.animate([
+                { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                { transform: `translateY(-100vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 3000 + 2000,
+                easing: 'linear',
+                iterations: Infinity
+            });
+
+            particlesContainer.appendChild(particle);
+        }
+
+        // Create multiple particles
+        for(let i = 0; i < 50; i++) {
+            createParticle();
+        }
+
+        // Logo hover effect
+        const logo = document.getElementById('brandLogo');
+        logo.addEventListener('mouseover', function() {
+            this.style.transform = 'scale(1.1) rotate(5deg)';
+            this.style.transition = 'transform 0.3s ease';
+        });
+
+        logo.addEventListener('mouseout', function() {
+            this.style.transform = 'scale(1) rotate(0deg)';
+        });
+    });
+
+    // Smooth reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+            }
+        });
+    });
+
+    document.querySelectorAll('.brand-content > *').forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>
