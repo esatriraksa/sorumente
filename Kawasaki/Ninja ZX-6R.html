@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMW S 1000 XR</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .product-detail {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .product-hero {
+            position: relative;
+            height: 80vh;
+            overflow: hidden;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+        }
+
+        .product-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-hero:hover img {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(45deg, #0066ff, #00ccff);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            animation: badgePulse 2s infinite;
+        }
+
+        @keyframes badgePulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 102, 255, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(0, 102, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 102, 255, 0); }
+        }
+
+        .product-info {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: -100px;
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #0066ff, #00ccff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .price {
+            font-size: 2rem;
+            color: #00ccff;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+
+        .tagline {
+            margin-bottom: 3rem;
+        }
+
+        .tagline h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .specs-highlight {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .spec-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .spec-item:hover {
+            transform: translateY(-10px);
+            background: rgba(0, 102, 255, 0.1);
+        }
+
+        .spec-item i {
+            font-size: 2rem;
+            color: #00ccff;
+            margin-bottom: 1rem;
+        }
+
+        .spec-item span {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .description {
+            margin-top: 3rem;
+        }
+
+        .description h3 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            color: #00ccff;
+        }
+
+        .description ul {
+            list-style: none;
+            margin-left: 1rem;
+        }
+
+        .description ul li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .description ul li:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #00ccff;
+        }
+
+        .specs-detail {
+            display: grid;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .spec-row:hover {
+            transform: translateX(10px);
+            background: rgba(0, 102, 255, 0.1);
+        }
+
+        .color-options {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .color-item {
+            text-align: center;
+        }
+
+        .color-swatch {
+            display: block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-bottom: 0.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.2);
+        }
+
+        .cta-section {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #0066ff, #00ccff);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 102, 255, 0.2);
+        }
+
+        /* Animasi saat scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .product-hero {
+                height: 50vh;
+            }
+
+            .product-info {
+                margin-top: -50px;
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .specs-highlight {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Konten HTML sama seperti sebelumnya -->
+    <div class="product-detail">
+        <div class="product-hero">
+            <img src="../../images/bmw-r1300gs/hero.jpg" alt="BMW R 1300 GS">
+            <div class="product-badge">New Model 2024</div>
+        </div>
+    
+
+    <div class="product-info">
+        <h1>THE NEW BMW S 1000 XR</h1>
+        <div class="tagline">
+            <h2>The challenge of curves and kilometres</h2>
+            <p>Make no concessions, demand it all. From yourself, but also from your machine. #NeverStopChallenging</p>
+        </div>
+
+        <div class="specs-highlight">
+            <div class="spec-item">
+                <i class="fas fa-engine"></i>
+                <span>165 hp</span>
+                <label>@ 11,000 rpm</label>
+            </div>
+            <div class="spec-item">
+                <i class="fas fa-cog"></i>
+                <span>114 Nm</span>
+                <label>@ 9,250 rpm</label>
+            </div>
+            <div class="spec-item">
+                <i class="fas fa-weight"></i>
+                <span>228 kg</span>
+                <label>Wet weight</label>
+            </div>
+            <div class="spec-item">
+                <i class="fas fa-gauge"></i>
+                <span>999 cc</span>
+                <label>Capacity</label>
+            </div>
+        </div>
+
+        <div class="description">
+            <h3>A CURVE THAT MAKES YOU ADDICTED</h3>
+            <p>The engine of the S 1000 XR is based on the high-performance engine of the new RR and was optimised according to the XR for uncompromising long-distance performance. Among other things, special camshaft profiles and designated manifolds deliver impressive torque from the middle and the widest usable speed range in its class.</p>
+
+            <h3>HIGHLIGHTS</h3>
+            <ul>
+                <li>Dynamic ESA Pro dengan teknologi valve dan shim package seperti racing</li>
+                <li>LED headlight dengan desain agresif dan front light signature</li>
+                <li>6.5" TFT display dengan BMW Motorrad Connectivity</li>
+                <li>Case system dengan holder magnesium yang ringan dan self-centering</li>
+                <li>Toll pass compartment dan storage 1.8L di bawah jok penumpang</li>
+                <li>Optimized weight - 10kg lebih ringan dari model sebelumnya</li>
+                <li>Adjustable windscreen untuk perlindungan optimal</li>
+                <li>M Performance parts dan carbon fiber accessories tersedia</li>
+            </ul>
+
+            <h3>PILIHAN WARNA</h3>
+            <div class="color-options">
+                <div class="color-item">
+                    <span class="color-swatch" style="background: #A8A8A8"></span>
+                    <label>Ice Grey uni</label>
+                </div>
+                <div class="color-item">
+                    <span class="color-swatch" style="background: linear-gradient(45deg, #FF0000, #FFFFFF)"></span>
+                    <label>Racing Red uni/White Aluminium metallic matt</label>
+                </div>
+                <div class="color-item">
+                    <span class="color-swatch" style="background: linear-gradient(45deg, #FFFFFF, #0066FF, #FF0000)"></span>
+                    <label>Style Sport (Light white/Racing blue metallic/Racing red)</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <button class="btn-primary">Build Your Own</button>
+            <button class="btn-secondary">Request Test Ride</button>
+            <a href="https://www.kawasaki-motor.co.id/id-id/sepeda-motor/ninja/supersport/ninja-zx-6r" target="_blank" class="btn-secondary">
+                Kunjungi Website Resmi BMW
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Animasi scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.spec-item, .description h3, .specs-detail, .color-options').forEach(el => {
+            el.classList.add('fade-in');
+            observer.observe(el);
+        });
+
+        // Interaksi warna
+        document.querySelectorAll('.color-swatch').forEach(swatch => {
+            swatch.addEventListener('click', function() {
+                const color = this.style.background;
+                const heroImage = document.querySelector('.product-hero img');
+                // Di sini Anda bisa menambahkan logika untuk mengganti gambar motor sesuai warna
+            });
+        });
+
+        // Smooth scroll untuk navigasi
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animasi loading untuk CTA buttons
+        document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
+            button.addEventListener('click', function() {
+                this.style.width = this.offsetWidth + 'px';
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                setTimeout(() => {
+                    this.innerHTML = this.dataset.originalText || 'Completed';
+                }, 2000);
+            });
+        });
+
+        // Parallax effect untuk hero image
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.product-hero img');
+            const scrolled = window.pageYOffset;
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+
+        // Hover effect untuk specs
+        document.querySelectorAll('.spec-row').forEach(row => {
+            row.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(10px)';
+            });
+            row.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+</body>
+</html>
